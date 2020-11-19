@@ -21,22 +21,6 @@ body {
   left: 100px;
 }
 
-.fish {
-  position: absolute;
-  top: 100px;
-  left: 400px;
-}
-
-.fish__item {
-  position: absolute;
-  width: 50px;
-  height: 124px;
-  background-image: url(../fish.png);
-  background-repeat: no-repeat;
-  outline: 1px solid gray;
-}
-
-
 #canvas::before,
 .fish::before {
   content: "CSS";
