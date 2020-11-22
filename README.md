@@ -1,3 +1,3 @@
 # sinusoid-animation
 trening sin() functions
-<img src="./cover.PNG">
+<img src="./cover.png">
