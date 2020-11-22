@@ -17,7 +17,7 @@ const ctx = canvas.getContext('2d')
 const canvasWidth = canvas.width;
 const canvasHeight = canvas.height;
 
-const AMPLITUDE = 1;
+const AMPLITUDE = 4;
 
 let offsetX = 2;
 let imgSliceWidth = 2;
