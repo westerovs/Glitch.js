@@ -1,3 +1,4 @@
 # sinusoid-animation
-trening sin() functions
+RUN: 
+https://westerovs.github.io/fish-sinusoid/
 <img src="./cover.png">
