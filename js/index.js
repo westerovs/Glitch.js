@@ -1,3 +1,4 @@
+'use-strict'
 /*
     img	Определяет используемое изображение, видео или элемент <canvas>
     sx	Необязательный параметр. Координата X начальной точки обрезки
@@ -10,43 +11,67 @@
     height	Необязательный параметр. Применяемая высота изображения (можно растянуть или сжать изображение)
 */
 
+class WaveGlitch {
+    constructor(src, posX = 0, posY = 0, opacity = 1) {
+        // аттрибуты
+        this.src   = src
+        this.posX  = posX
+        this.posY  = posY
 
+        this.canvas = document.querySelector('canvas');
+        this.ctx = canvas.getContext('2d')
+        this.canvasWidth = canvas.width;
+        this.canvasHeight = canvas.height;
+        this.ctx.globalAlpha = opacity;
 
-const canvas = document.querySelector('canvas');
-const ctx = canvas.getContext('2d')
-const canvasWidth = canvas.width;
-const canvasHeight = canvas.height;
+        // настройки
+        this.AMPLITUDE     = 1
+        this.offsetX       = 2
+        this.imgSliceWidth = 2
+        this.speed         = 0
+        this.imageSlice    = 100  // кол-во кусочков на которое обрезается img
 
-const AMPLITUDE = 4;
+        this.fishOrigin = new Image();
+        this.fishOrigin.src = this.src
 
-let offsetX = 2;
-let imgSliceWidth = 2;
-let currentAnimationTime = 0;
+        this.imgHeingt  = 124 // можно вынести в атрибуты класса
 
-const fish = new Image();
-fish.src = 'fish.png'
-
-function runAnimate() {
-    currentAnimationTime += 0.30;
-
-    ctx.clearRect(0, 0, canvasWidth, canvasHeight)
-
-    for (let i = 0; i <= 100; i++) {
-        ctx.drawImage(
-            fish,
-            offsetX * i,
-            (Math.sin(currentAnimationTime - (i / 4) ) * AMPLITUDE),
-            imgSliceWidth,
-            canvasHeight,
-            offsetX * i,
-            0,
-            imgSliceWidth,
-            canvasHeight
-        )
+        this.requestAnim = null
     }
 
-    requestAnimationFrame(runAnimate);
+    startAnimate = () => {
+        this.speed += 0.10;
+
+        this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight)
+
+        for (let i = 0; i <= this.imageSlice; i++) {
+            this.ctx.drawImage(
+                this.fishOrigin,
+
+                this.offsetX * i - this.posX,
+                (Math.sin(this.speed - (i / 4) ) * this.AMPLITUDE),
+                this.imgSliceWidth,
+                this.imgHeingt,
+
+                this.offsetX * i,
+                this.posY,
+                this.imgSliceWidth,
+                this.imgHeingt
+            )
+        }
+    
+        this.requestAnim = requestAnimationFrame(this.startAnimate);
+    }
+
+    init = () => {
+        this.fishOrigin.addEventListener('load', this.startAnimate)
+    }
+
+    destroy = () => {
+        cancelAnimationFrame(this.requestAnim)
+    }
 }
 
-// запуск
-fish.addEventListener('load', runAnimate)
+const waveGlitch = new WaveGlitch('img/fish-origin.png', 10, 10, 1)
+waveGlitch.init()
+// waveGlitch.destroy()
