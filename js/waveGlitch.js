@@ -13,7 +13,7 @@ class WaveGlitch {
         this.ctx.globalAlpha = opacity;
 
         // настройки
-        this.imgSlice      = 100  // кол-во кусочков на которое обрезается img(примерно от половины ширины)
+        this.imgSlice      = this.canvasWidth / 2  // кол-во кусочков на которое обрезается img(половина ширины)
         this.imgSliceWidth = 2    // обрезаем два кусочка
         this.imgOffsetX    = 2    // двигаем два кусочка
         this.waveAmplitude = 1
