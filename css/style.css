@@ -9,12 +9,12 @@
 html,
 body {
   height: 100%;
-  background-color: #2C7580;
+  background-image: linear-gradient(-140deg, blue, lightblue 0%, blue);
   color: #ccc;
 }
 
 #canvas {
-  border: 1px solid black;
+  outline: 1px solid black;
   position: absolute;
   top: 100px;
   left: 100px;
