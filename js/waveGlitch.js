@@ -61,5 +61,5 @@ class WaveGlitch {
     }
 }
 
-const waveGlitch = new WaveGlitch('canvas', 'img/fish.png', 0, 50, 400, 259)
+const waveGlitch = new WaveGlitch('canvas', 'img/fish.png', 0, 0, 500, 313)
 waveGlitch.init()
