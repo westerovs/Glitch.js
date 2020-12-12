@@ -1,37 +1,49 @@
 class WaveGlitch {
-    constructor(id, src, posX = 0, posY = 0, width, height) {
-        // параметры
+    constructor(
+        id,
+        src,
+        width,
+        height,
+        posX = 0,
+        posY = 0,
+        waveAmplitude = 10,
+        intensity = 2,
+        speed = 0.10,
+) {
         this.id   = id
         this.src  = src
         this.posX = posX
         this.posY = posY
+        this.requestAnim = null
 
-        this.canvas          = document.getElementById(id);
-        this.ctx             = this.canvas.getContext('2d')
-        this.canvasWidth     = this.canvas.width;
-        this.canvasHeight    = this.canvas.height;
+        // get image
+        this.image     = new Image();
+        this.image.src = this.src
+        this.imgWidth  = width
+        this.imgHeight = height
 
-        // image
-        this.image      = new Image();
-        this.image.src  = this.src
-        this.imgWidth   = width
-        this.imgHeight  = height
+        // get canvas
+        this.canvas       = document.querySelector(`${ id }`);
+        this.ctx          = this.canvas.getContext('2d')
+        this.canvasWidth  = this.imgWidth;
+        this.canvasHeight = this.imgHeight;
+        this.canvas.setAttribute('width', this.canvasWidth)   // width  === ширине img
+        this.canvas.setAttribute('height', this.canvasHeight) // height === ширине img
 
-        // управление
+        // cut image
         this.imgSlice      = this.imgWidth / 2  // кол-во кусочков на которое обрезается img
         this.imgSliceWidth = 2                  // ширина кусочка
-        this.waveAmplitude = 10
-        this.intensity     = 2
-        this.speed         = 0
 
-        this.requestAnim = null
+        // control animation
+        this.waveAmplitude = waveAmplitude
+        this.intensity     = intensity
+        this.speed         = 0
+        this.speedPlus     = speed
     }
 
     startAnimate = () => {
-        this.speed += 0.10;
-
+        this.speed += this.speedPlus;
         this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight)
-
 
         for (let i = 0; i <= this.imgSlice; i++) {
             this.ctx.drawImage(
@@ -57,9 +69,26 @@ class WaveGlitch {
     }
 
     destroy = () => {
+        // stop animation
         cancelAnimationFrame(this.requestAnim)
     }
 }
 
-const waveGlitch = new WaveGlitch('canvas', 'img/fish.png', 0, 0, 500, 313)
-waveGlitch.init()
+const waveGlitch = new WaveGlitch(
+    '#canvas',         // id элемента, или селектор
+    'img/fish.png',   // путь до картинки(от HTML)
+    500,
+    313,
+
+    // ↓ необязательные параметры ↓
+    0,
+    0,
+    10,
+    10,
+    0.01 // значение от 0.1 до 1 (0.01, 0.001 и тд)
+)
+
+waveGlitch.init()       // вызвать анимацию
+// waveGlitch.destroy() // остановить анимацию
+
+// для канваса width и height установятся автоматически !

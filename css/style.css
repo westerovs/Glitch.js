@@ -14,7 +14,7 @@ body {
 }
 
 #canvas {
-  /*outline: 1px solid gray;*/
+  outline: 1px solid gray;
   position: absolute;
   top: 0;
   right: 0;
