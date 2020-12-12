@@ -3,6 +3,6 @@ npm-debug.log
 .DS_Store
 /dist
 /release
-/.idea
+/idea
 /yarn-error.log
 /package-lock.json
