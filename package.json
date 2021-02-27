@@ -2,9 +2,9 @@
   "name": "glitch",
   "version": "1.0.0",
   "description": "Небольшая библиотека, собственной разработки. Ещё в процессе редактирования",
-  "main": "./src/index.js",
+  "main": "docs/index.js",
   "scripts": {
-    "lint": "eslint ./src"
+    "lint": "eslint docs"
   },
   "repository": {
     "type": "git",
