@@ -16,11 +16,12 @@
         "array-bracket-spacing": ["error", "never"],
         "quotes": ["error", "single"],
         "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 0 }],
-        "linebreak-style": ["error", "windows"],
         "eol-last": ["error", "always"],
         "indent": [2, 4],
         "template-curly-spacing": ["error", "always"],
         "no-multi-spaces": "off",
-        "no-plusplus": "off"
+        "no-plusplus": "off",
+        "linebreak-style": "off",
+        "no-console": "off"
     }
 }
