@@ -75,7 +75,7 @@ class WaveGlitch {
 
 const waveGlitch = new WaveGlitch(
     '#canvas',         // id элемента, или селектор
-    'img/fish.png',   // путь до картинки(от HTML)
+    'src/img/fish.png',   // путь до картинки(от HTML)
     500,
     313,
 
