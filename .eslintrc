@@ -1,0 +1,26 @@
+{
+    "extends": ["airbnb/base"],
+    "parser" : "babel-eslint",
+    "env": {
+        "browser": true,
+        "node": true,
+        "commonjs": true,
+        "jest": true,
+        "es6": true
+    },
+    "rules": {
+        "comma-dangle": ["error", "always-multiline"],
+        "semi": ["error", "never"],
+        "arrow-parens": ["error", "as-needed"],
+        "object-curly-spacing": ["error", "always"],
+        "array-bracket-spacing": ["error", "never"],
+        "quotes": ["error", "single"],
+        "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 0 }],
+        "linebreak-style": ["error", "windows"],
+        "eol-last": ["error", "always"],
+        "indent": [2, 4],
+        "template-curly-spacing": ["error", "always"],
+        "no-multi-spaces": "off",
+        "no-plusplus": "off"
+    }
+}

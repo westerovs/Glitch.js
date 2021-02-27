@@ -3,6 +3,8 @@ npm-debug.log
 .DS_Store
 /dist
 /release
+/.vscode
+/.git
 .idea
 /yarn-error.log
 /package-lock.json

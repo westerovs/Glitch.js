@@ -1,0 +1,31 @@
+{
+  "name": "glitch",
+  "version": "1.0.0",
+  "description": "Небольшая библиотека, собственной разработки. Ещё в процессе редактирования",
+  "main": "./src/index.js",
+  "scripts": {
+    "lint": "eslint ./src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/westerovs/my_frontend_template.git"
+  },
+  "keywords": [],
+  "author": "web start",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/westerovs/my_frontend_template/issues"
+  },
+  "homepage": "https://github.com/westerovs/my_frontend_template#readme",
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.20.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^8.1.0",
+    "eslint-plugin-html": "^6.1.1",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.3.1",
+    "prettier": "^1.18.2"
+  }
+}
