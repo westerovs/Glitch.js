@@ -7,6 +7,7 @@
 <b>🟢RUN:</b>
 https://westerovs.github.io/Glitch.js/
 <br>
-<b>Youtube video:</b>
+<b>
+🎦video:</b>
 https://www.youtube.com/watch?v=uc_POtM_nho&t=312s
 <img src="./cover.png">
