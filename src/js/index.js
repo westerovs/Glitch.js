@@ -1,92 +1,87 @@
 class WaveGlitch {
-    constructor(
-        id,
-        src,
-        width,
-        height,
-        posX = 0,
-        posY = 0,
-        waveAmplitude = 10,
-        intensity = 2,
-        speed = 0.10,
-    ) {
-        this.src  = src
-        this.posX = posX
-        this.posY = posY
-        this.requestAnim = null
+  constructor({
+      id,
+      src,
+      waveAmplitude = 10,
+      intensity = 10,
+      speed = 0.002,
+    }) {
+    this.id            = id
+    this.src           = src
+    this.waveAmplitude = waveAmplitude
+    this.intensity     = intensity
+    this.speed         = speed
+    
+    this.requestAnim = null
+    this.ctx    = null
+    this.image  = null
+  
+    this.width  = window.innerWidth
+    this.height = window.innerHeight
+    this.centerWindowX = null
+    this.centerWindowY = null
+    
+    this.init()
+  }
+  
+  init = async () => {
+    this.#createCanvas()
+    this.#createImage()
+    
+    this.image.addEventListener('load', () => {
+      this.centerWindowX = (window.innerWidth / 2) - this.image.width / 2
+      this.centerWindowY = (window.innerHeight / 2) - this.image.height / 2
+      this.#createAnimation()
+    })
+  }
 
-        // get image
-        this.image     = new Image()
-        this.image.src = this.src
-        this.imgWidth  = width
-        this.imgHeight = height
+  #createCanvas = () => {
+    const canvas = document.createElement('canvas')
+    this.ctx     = canvas.getContext('2d')
+    
+    canvas.id = this.id
+    canvas.classList.add('canvas')
+    canvas.setAttribute('width', `${ this.width }`)
+    canvas.setAttribute('height', `${ this.height }`)
+    
+    document.body.append(canvas)
+  }
+  
+  #createImage = () => {
+    this.image = new Image()
+    this.image.src = this.src
+  }
+  
+  #createAnimation = () => {
+    const imgSlice = this.width / 2  // кол-во кусочков на которое обрезается img
+    const imgSliceWidth = 2  // ширина кусочка
+    
+    this.speed += 0.02
+    this.ctx.clearRect(0, 0, this.width, this.height)
+  
+    for (let i = 0; i <= imgSlice; i++) {
+      this.ctx.drawImage(
+        this.image,
+  
+        -this.centerWindowX + (i * imgSliceWidth),
+        -this.centerWindowY - (Math.sin(this.speed - (i / this.waveAmplitude)) * this.intensity),
+        imgSliceWidth,
+        this.height,
 
-        // get canvas
-        this.canvas       = document.querySelector(`${ id }`)
-        this.ctx          = this.canvas.getContext('2d')
-        this.canvasWidth  = this.imgWidth
-        this.canvasHeight = this.imgHeight
-        this.canvas.setAttribute('width', this.canvasWidth)   // width  === ширине img
-        this.canvas.setAttribute('height', this.canvasHeight) // height === ширине img
-
-        // cut image
-        this.imgSlice      = this.imgWidth / 2  // кол-во кусочков на которое обрезается img
-        this.imgSliceWidth = 2                  // ширина кусочка
-
-        // control animation
-        this.waveAmplitude = waveAmplitude
-        this.intensity     = intensity
-        this.speed         = 0
-        this.speedPlus     = speed
+        i * imgSliceWidth,
+        0,
+        imgSliceWidth,
+        this.height,
+      )
     }
-
-    startAnimate = () => {
-        this.speed += this.speedPlus
-        this.ctx.clearRect(0, 0, this.canvasWidth, this.canvasHeight)
-
-        for (let i = 0; i <= this.imgSlice; i++) {
-            this.ctx.drawImage(
-                this.image,
-
-                i * this.imgSliceWidth - this.posX,
-                Math.sin(this.speed - (i / this.waveAmplitude)) * this.intensity,
-                this.imgSliceWidth,
-                this.imgHeight,
-
-                i * this.imgSliceWidth,
-                this.posY,
-                this.imgSliceWidth,
-                this.imgHeight,
-            )
-        }
-
-        this.requestAnim = requestAnimationFrame(this.startAnimate)
-    }
-
-    init = () => {
-        this.image.addEventListener('load', this.startAnimate)
-    }
-
-    destroy = () => {
-        // stop animation
-        cancelAnimationFrame(this.requestAnim)
-    }
+    
+    this.requestAnim = requestAnimationFrame(this.#createAnimation)
+  }
 }
 
-const waveGlitch = new WaveGlitch(
-    '#canvas',         // id элемента, или селектор
-    'src/img/fish.png',   // путь до картинки(от HTML)
-    500,
-    313,
+new WaveGlitch({
+  id       : 'canvas',
+  src      : 'src/img/fish.png',
+  speed    : 0.02, // значение от 0.1 до 1 (0.01, 0.001 и тд)
+})
 
-    // ↓ необязательные параметры ↓
-    0,
-    0,
-    10,
-    10,
-    0.01, // значение от 0.1 до 1 (0.01, 0.001 и тд)
-)
-
-waveGlitch.init() // вызвать анимацию
-// waveGlitch.destroy() // остановить анимацию
-// для канваса width и height установятся автоматически !
