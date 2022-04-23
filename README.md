@@ -1,5 +1,4 @@
-# sinusoid-animation on pure JS
-Glitch effect on canvas. Vanilla JavaScript 
+# Glitch wave effect on canvas. Vanilla JS
 <br>
 Изображение помещается на холст, разрезается на сотни частей и анимируется по синусоиде
 <br>
