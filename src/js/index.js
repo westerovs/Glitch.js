@@ -24,7 +24,7 @@ class WaveGlitch {
     this.init()
   }
   
-  init = async () => {
+  init = () => {
     this.#createCanvas()
     this.#createImage()
     
